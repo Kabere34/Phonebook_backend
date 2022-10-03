@@ -7,4 +7,5 @@ class Phonebook(models.Model):
   lastName=models.CharField(max_length=30)
   phoneNumber = PhoneNumberField(null=False, blank=False, unique=True)
 
-  
+  def __str__(self) -> str:
+    return firstName + ' ' + lastName + ' ' + phoneNumber
