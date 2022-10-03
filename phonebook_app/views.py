@@ -11,6 +11,7 @@ class Phonebook(APIView):
     serializer=PhonebookSerializer(all_contacts,many=True)
     return Response(serializer.data)
 
+
   def post(self,request,format=None):
     serializer=PhonebookSerializer(data=request.data)
     if serializer.is_valid():
