@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'phonebook_app'
+    'phonebook_app',
+    'rest_framework',
+    'corsheaders',
+    'allauth'
+
 
 ]
 
@@ -51,9 +55,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'phonebook_backend.urls'
+
+CORS_ALLOW_ALL_ORIGINS=True
 
 TEMPLATES = [
     {
