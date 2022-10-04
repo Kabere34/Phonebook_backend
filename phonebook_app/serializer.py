@@ -6,3 +6,5 @@ class PhonebookSerializer(serializers.ModelSerializer):
   class Meta:
     model=Phonebook
     fields='__all__'
+
+

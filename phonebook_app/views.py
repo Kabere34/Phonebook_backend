@@ -1,9 +1,15 @@
+from urllib import response
 from django.shortcuts import render
 from rest_framework.views import APIView
+from phonebook_app import serializer
 from phonebook_app.serializer import PhonebookSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Phonebook
+from django.db.models import Q
+from rest_framework import generics
+from rest_framework import filters
+
 
 # Create your views here.
 class PhonebookView(APIView):
@@ -19,4 +25,14 @@ class PhonebookAdd(APIView):
       serializer.save()
       return Response(serializer.data,status.HTTP_201_CREATED)
     return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
+
+
+class SearchAPIView(generics.ListCreateAPIView):
+    search_fields = ['firstName', 'lastName', 'phoneNumber']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Phonebook.objects.all()
+    serializer_class = PhonebookSerializer
+
+
+
 

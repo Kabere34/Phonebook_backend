@@ -4,4 +4,6 @@ from .import views
 urlpatterns = [
   path('/contactView', views.PhonebookView.as_view()),
   path('/contactAdd', views.PhonebookAdd.as_view()),
+  path('/search/', views.SearchAPIView.as_view()),
 ]
+
