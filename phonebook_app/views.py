@@ -28,7 +28,7 @@ class PhonebookAdd(APIView):
 
 
 class SearchAPIView(generics.ListCreateAPIView):
-    search_fields = ['firstName', 'lastName', 'phoneNumber']
+    search_fields = ['firstName', 'lastName', 'phoneNumber','email']
     filter_backends = (filters.SearchFilter,)
     queryset = Phonebook.objects.all()
     serializer_class = PhonebookSerializer
