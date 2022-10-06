@@ -9,6 +9,7 @@ from .models import Phonebook
 from django.db.models import Q
 from rest_framework import generics
 from rest_framework import filters
+from rest_framework.decorators import api_view
 
 
 # Create your views here.
@@ -26,12 +27,38 @@ class PhonebookAdd(APIView):
       return Response(serializer.data,status.HTTP_201_CREATED)
     return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
 
-
 class SearchAPIView(generics.ListCreateAPIView):
     search_fields = ['firstName', 'lastName', 'phoneNumber','email']
     filter_backends = (filters.SearchFilter,)
     queryset = Phonebook.objects.all()
     serializer_class = PhonebookSerializer
+
+
+class updateContact(APIView):
+  def post(self, request, pk):
+
+    contact = Phonebook.objects.get(id=pk)
+    # print(contact.phoneNumber)
+
+    print(contact.firstName,'contact')
+    serializer = PhonebookSerializer(instance=contact,data=request.data)
+    # print(request)
+    if contact:
+      firstName=request.data["firstName"]
+      lastName=request.data["lastName"]
+      phoneNumber=request.data['phoneNumber']
+      email=request.data["email"]
+      updated_contact=Phonebook.objects.filter(id=pk).update(firstName=firstName,lastName=lastName,phoneNumber=phoneNumber, email=email)
+    return Response()
+
+
+class deleteContact(APIView):
+  def deleteContact(request, pk):
+    product = Phonebook.objects.get(id=pk)
+    product.delete()
+
+    return Response('Items delete successfully!')
+
 
 
 
