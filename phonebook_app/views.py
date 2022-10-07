@@ -53,11 +53,12 @@ class updateContact(APIView):
 
 
 class deleteContact(APIView):
-  def deleteContact(request, pk):
-    product = Phonebook.objects.get(id=pk)
-    product.delete()
+  def post(self,request, pk):
+    product = Phonebook.objects.get(id=pk).delete()
+    # print('product',product)
+    # product.delete()
 
-    return Response('Items delete successfully!')
+    return Response('Item deleted successfully!')
 
 
 
